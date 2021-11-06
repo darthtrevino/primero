@@ -1,7 +1,8 @@
 import { fromJS } from "immutable";
 import { List } from "@material-ui/core";
 
-import { setupMountedComponent } from "../../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
+
 import ListFlagsItem from "../list-flags-item";
 import { FlagRecord } from "../../records";
 
@@ -42,13 +43,7 @@ describe("<ListFlags />", () => {
   });
 
   it("renders component with valid props", () => {
-    const listFlagsProps = { ...component.find(ListFlags).props() };
-
-    ["record", "recordType"].forEach(property => {
-      expect(listFlagsProps).to.have.property(property);
-      delete listFlagsProps[property];
-    });
-    expect(listFlagsProps).to.be.empty;
+    expectObjectHasProperties(component.find(ListFlags).props(), ["record", "recordType"]);
   });
 
   it("should render List", () => {

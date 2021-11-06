@@ -2,7 +2,7 @@ import { fromJS } from "immutable";
 import { Grid } from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
 
-import { setupMountedComponent } from "../../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
 
 import ApprovalSummary from "./component";
 
@@ -53,12 +53,11 @@ describe("<ApprovalSummary /> - Component", () => {
   });
 
   it("renders component with valid props", () => {
-    const approvalsProps = { ...component.find(ApprovalSummary).props() };
-
-    ["approvalSubform", "css", "isRequest", "isResponse"].forEach(property => {
-      expect(approvalsProps).to.have.property(property);
-      delete approvalsProps[property];
-    });
-    expect(approvalsProps).to.be.empty;
+    expectObjectHasProperties(component.find(ApprovalSummary).props(), [
+      "approvalSubform",
+      "css",
+      "isRequest",
+      "isResponse"
+    ]);
   });
 });

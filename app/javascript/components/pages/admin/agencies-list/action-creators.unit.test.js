@@ -3,16 +3,11 @@ import { RECORD_PATH } from "../../../../config";
 import * as actionsCreators from "./action-creators";
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<AgenciesList /> - Action Creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionsCreators };
-
-    ["fetchAgencies", "setAgenciesFilter"].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionsCreators, ["fetchAgencies", "setAgenciesFilter"]);
   });
 
   it("should check that 'fetchAgencies' action creator returns the correct object", () => {

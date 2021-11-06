@@ -1,10 +1,10 @@
 import * as index from "./index";
 
-describe("<Form /> - Utils", () => {
-  const indexValues = { ...index };
+import { expectObjectHasProperties } from "~test";
 
+describe("<Form /> - Utils", () => {
   it("should have known properties", () => {
-    [
+    expectObjectHasProperties(index, [
       "buildRoleOptions",
       "get",
       "notVisible",
@@ -13,10 +13,6 @@ describe("<Form /> - Utils", () => {
       "touchedFormData",
       "valueParser",
       "whichFormMode"
-    ].forEach(property => {
-      expect(indexValues).to.have.property(property);
-      delete indexValues[property];
-    });
-    expect(indexValues).to.be.empty;
+    ]);
   });
 });

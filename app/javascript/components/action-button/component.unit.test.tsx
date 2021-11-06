@@ -1,10 +1,10 @@
 import { fromJS } from "immutable";
 
-import { setupMountedComponent } from "../../test";
-
 import { DefaultButton, IconButton } from "./components";
 import ActionButton from "./component";
 import { ACTION_BUTTON_TYPES } from "./constants";
+
+import { expectObjectHasProperties, setupMountedComponent } from "~test";
 
 describe("<ActionButton />", () => {
   const props = {
@@ -23,14 +23,14 @@ describe("<ActionButton />", () => {
   });
 
   it("renders DefaultButton type", () => {
-    const { component } = setupMountedComponent(ActionButton, props, state);
+    const { component } = setupMountedComponent(ActionButton as any, props, state);
 
     expect(component.find(DefaultButton)).to.have.lengthOf(1);
   });
 
   it("renders IconButton type", () => {
     const { component } = setupMountedComponent(
-      ActionButton,
+      ActionButton as any,
       {
         ...props,
         type: ACTION_BUTTON_TYPES.icon
@@ -46,14 +46,18 @@ describe("<ActionButton />", () => {
   });
 
   it("renders component with valid props", () => {
-    const { component } = setupMountedComponent(ActionButton, props, state);
-    const componentsProps = { ...component.find(ActionButton).props() };
+    const { component } = setupMountedComponent(ActionButton as any, props, state);
 
-    ["icon", "isCancel", "isTransparent", "pending", "text", "type", "outlined", "rest"].forEach(property => {
-      expect(componentsProps).to.have.property(property);
-      delete componentsProps[property];
-    });
-    expect(componentsProps).to.be.empty;
+    expectObjectHasProperties(component.find(ActionButton).props(), [
+      "icon",
+      "isCancel",
+      "isTransparent",
+      "pending",
+      "text",
+      "type",
+      "outlined",
+      "rest"
+    ]);
   });
 
   it("should not render Action button if rest.hide is true", () => {
@@ -61,7 +65,7 @@ describe("<ActionButton />", () => {
       ...props,
       rest: { hide: true }
     };
-    const { component } = setupMountedComponent(ActionButton, newProps);
+    const { component } = setupMountedComponent(ActionButton as any, newProps);
 
     expect(component.find(IconButton)).to.be.empty;
   });

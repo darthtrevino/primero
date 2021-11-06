@@ -1,8 +1,9 @@
 import { fromJS } from "immutable";
 import { AccordionDetails, AccordionSummary } from "@material-ui/core";
 
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
+
 import RecordFormTitle from "../record-form/form/record-form-title";
-import { setupMountedComponent } from "../../test";
 
 import Approvals from "./container";
 import ApprovalPanel from "./components/panel";
@@ -72,13 +73,7 @@ describe("<Approvals /> - Component", () => {
   });
 
   it("renders component with valid props", () => {
-    const approvalsProps = { ...component.find(Approvals).props() };
-
-    ["approvals", "handleToggleNav", "mobileDisplay"].forEach(property => {
-      expect(approvalsProps).to.have.property(property);
-      delete approvalsProps[property];
-    });
-    expect(approvalsProps).to.be.empty;
+    expectObjectHasProperties(component.find(Approvals).props(), ["approvals", "handleToggleNav", "mobileDisplay"]);
   });
 
   describe("When we don't have data", () => {

@@ -1,35 +1,28 @@
 import * as moduleToTest from "./index";
+import { expectObjectHasProperties } from "~test";
 
 describe("app/javascript/test/index", () => {
-  const clone = { ...moduleToTest };
-
-  after(() => {
-    expect(clone).to.be.empty;
-  });
-
-  [
-    "abbrMonthNames",
-    "setupMockFieldComponent",
-    "setupMockFormComponent",
-    "setupMountedComponent",
-    "setupMountedThemeComponent",
-    "spy",
-    "stub",
-    "fake",
-    "tick",
-    "useFakeTimers",
-    "mock",
-    "createSimpleMount",
-    "createMockStore",
-    "createMiddleware",
-    "listHeaders",
-    "lookups",
-    "translateOptions",
-    "setupHook"
-  ].forEach(property => {
-    it(`exports property '${property}'`, () => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
+  it("has expected properties", () => {
+    expectObjectHasProperties(moduleToTest, [
+      "abbrMonthNames",
+      "setupMockFieldComponent",
+      "setupMockFormComponent",
+      "setupMountedComponent",
+      "setupMountedThemeComponent",
+      "spy",
+      "stub",
+      "fake",
+      "tick",
+      "useFakeTimers",
+      "mock",
+      "createSimpleMount",
+      "createMockStore",
+      "createMiddleware",
+      "listHeaders",
+      "lookups",
+      "translateOptions",
+      "setupHook",
+      "expectObjectHasProperties"
+    ]);
   });
 });

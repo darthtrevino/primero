@@ -1,27 +1,13 @@
 /* eslint-disable import/no-namespace */
 import * as index from "./index";
+import { expectObjectHasProperties } from "~test";
 
 describe("<ActionButton />  - index", () => {
   it("exports an object", () => {
     expect(index).to.be.an("object");
   });
 
-  describe("properties", () => {
-    let clone: any;
-
-    before(() => {
-      clone = { ...index };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    ["DefaultButton", "IconButton"].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(index).to.have.property(property);
-        delete clone[property];
-      });
-    });
+  it("exports expected properties", () => {
+    expectObjectHasProperties(index, ["DefaultButton", "IconButton"]);
   });
 });

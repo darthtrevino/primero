@@ -2,7 +2,7 @@ import { fromJS } from "immutable";
 import { ListItem, ListItemText, Divider } from "@material-ui/core";
 import FlagIcon from "@material-ui/icons/Flag";
 
-import { setupMountedComponent } from "../../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "../../../../test";
 import { UserArrowIcon } from "../../../../images/primero-icons";
 import { FormAction } from "../../../form";
 import ActionButton from "../../../action-button";
@@ -67,12 +67,6 @@ describe("<ListFlagsItem />", () => {
   });
 
   it("renders component with valid props", () => {
-    const listFlagsItemProps = { ...component.find(ListFlagsItem).props() };
-
-    ["flag", "handleDelete"].forEach(property => {
-      expect(listFlagsItemProps).to.have.property(property);
-      delete listFlagsItemProps[property];
-    });
-    expect(listFlagsItemProps).to.be.empty;
+    expectObjectHasProperties(component.find(ListFlagsItem).props(), ["flag", "handleDelete"]);
   });
 });

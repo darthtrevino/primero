@@ -1,11 +1,10 @@
 import * as constants from "./index";
 
-describe("<IndexFilters /> - index", () => {
-  const clone = { ...constants };
+import { expectObjectHasProperties } from "~test";
 
+describe("<IndexFilters /> - index", () => {
   it("should have known properties", () => {
-    expect(clone).to.be.an("object");
-    [
+    expectObjectHasProperties(constants, [
       "default",
       "reducer",
       "applyFilters",
@@ -13,10 +12,6 @@ describe("<IndexFilters /> - index", () => {
       "OR_FIELDS",
       "FILTER_TYPES",
       "DEFAULT_FILTERS"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-    expect(clone).to.be.empty;
+    ]);
   });
 });

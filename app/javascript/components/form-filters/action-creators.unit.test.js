@@ -1,16 +1,11 @@
 import * as actionCreators from "./action-creators";
 import * as actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("components/form-filters/action-creators.js", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionCreators };
-
-    ["clearFormFilters", "setFormFilters"].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionCreators, ["clearFormFilters", "setFormFilters"]);
   });
 
   it("should create an action to set the form filters", () => {

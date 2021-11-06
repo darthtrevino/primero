@@ -1,16 +1,11 @@
 import * as actionCreators from "./action-creators";
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("ChangeLogs - Action Creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionCreators };
-
-    ["fetchChangeLogs"].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionCreators, ["fetchChangeLogs"]);
   });
 
   it("should check the 'fetchChangeLogs' action creator to return the correct object", () => {

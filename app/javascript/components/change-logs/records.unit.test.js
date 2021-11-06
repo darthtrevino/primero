@@ -1,14 +1,9 @@
 import * as records from "./records";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("ChangeLogs - records", () => {
-  const recordsValues = { ...records };
-
-  ["ChangeLogsRecord"].forEach(property => {
-    expect(recordsValues).to.have.property(property);
-    expect(recordsValues[property]).to.be.a("function");
-
-    delete recordsValues[property];
+  it("exports expected values", () => {
+    expectObjectHasProperties(records, ["ChangeLogsRecord"]);
   });
-
-  expect(recordsValues).to.be.empty;
 });

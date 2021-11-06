@@ -1,10 +1,10 @@
 import * as constants from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("ChangeLogs - Constants", () => {
   it("should have known properties", () => {
-    const clonedConstants = { ...constants };
-
-    [
+    expectObjectHasProperties(constants, [
       "APPROVALS",
       "CREATE_ACTION",
       "EMPTY_VALUE",
@@ -13,11 +13,6 @@ describe("ChangeLogs - Constants", () => {
       "NAME",
       "SUBFORM",
       "TYPE"
-    ].forEach(property => {
-      expect(clonedConstants).to.have.property(property);
-      delete clonedConstants[property];
-    });
-
-    expect(clonedConstants).to.be.empty;
+    ]);
   });
 });

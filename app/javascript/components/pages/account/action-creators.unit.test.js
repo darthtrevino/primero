@@ -2,6 +2,8 @@ import { stub } from "../../../test";
 import { ENQUEUE_SNACKBAR, generate } from "../../notifier";
 import { RECORD_PATH, METHODS } from "../../../config";
 
+import { expectObjectHasProperties } from "~test";
+
 import * as actionsCreators from "./action-creators";
 import actions from "./actions";
 
@@ -14,23 +16,8 @@ describe("pages/account/action-creators.js", () => {
     generate.messageKey?.restore();
   });
 
-  describe("properties", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...actionsCreators };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    ["fetchCurrentUser", "clearCurrentUser", "updateUserAccount"].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(actionsCreators).to.have.property(property);
-        delete clone[property];
-      });
-    });
+  it("exports expected properties", () => {
+    expectObjectHasProperties(actionsCreators, ["fetchCurrentUser", "clearCurrentUser", "updateUserAccount"]);
   });
 
   it("should check that 'fetchCurrentUser' action creator returns the correct object", () => {

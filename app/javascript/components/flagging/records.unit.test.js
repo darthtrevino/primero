@@ -1,14 +1,9 @@
 import * as records from "./records";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("Flaggging - records", () => {
-  const recordsValues = { ...records };
-
-  ["FlagRecord"].forEach(property => {
-    expect(recordsValues).to.have.property(property);
-    expect(recordsValues[property]).to.be.a("function");
-
-    delete recordsValues[property];
+  it("exports expected properties", () => {
+    expectObjectHasProperties(records, ["FlagRecord"]);
   });
-
-  expect(recordsValues).to.be.empty;
 });

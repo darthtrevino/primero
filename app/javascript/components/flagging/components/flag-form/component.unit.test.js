@@ -1,6 +1,6 @@
 import { Formik, Form } from "formik";
 
-import { setupMountedComponent } from "../../../../test";
+import { expectObjectHasProperties, setupMountedComponent } from "~test";
 import { RECORD_TYPES } from "../../../../config/constants";
 import ActionButton from "../../../action-button";
 
@@ -36,12 +36,6 @@ describe("<FlagForm />", () => {
   });
 
   it("renders component with valid props", () => {
-    const flagFormProps = { ...component.find(FlagForm).props() };
-
-    ["handleActiveTab", "record", "recordType"].forEach(property => {
-      expect(flagFormProps).to.have.property(property);
-      delete flagFormProps[property];
-    });
-    expect(flagFormProps).to.be.empty;
+    expectObjectHasProperties(component.find(FlagForm).props(), ["handleActiveTab", "record", "recordType"]);
   });
 });

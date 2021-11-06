@@ -1,6 +1,6 @@
 import { DialogTitle, IconButton } from "@material-ui/core";
 
-import { setupMountedComponent } from "../../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
 
 import TitleWithClose from "./component";
 
@@ -26,14 +26,14 @@ describe("<TitleWithClose />", () => {
   });
 
   it("should accept valid props", () => {
-    const TitleWithCloseProps = { ...component.find(TitleWithClose).props() };
-
     expect(component.find(TitleWithClose)).to.have.lengthOf(1);
-    ["closeHandler", "dialogAction", "dialogSubtitle", "dialogTitle", "disableClose"].forEach(property => {
-      expect(TitleWithCloseProps).to.have.property(property);
-      delete TitleWithCloseProps[property];
-    });
-    expect(TitleWithCloseProps).to.be.empty;
+    expectObjectHasProperties(component.find(TitleWithClose).props(), [
+      "closeHandler",
+      "dialogAction",
+      "dialogSubtitle",
+      "dialogTitle",
+      "disableClose"
+    ]);
   });
 
   it("should render a title with subtitle ", () => {

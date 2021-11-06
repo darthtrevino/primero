@@ -1,11 +1,10 @@
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<AgenciesForm /> - Actions", () => {
   it("should have known properties", () => {
-    const clonedActions = { ...actions };
-
-    expect(clonedActions).to.be.an("object");
-    [
+    expectObjectHasProperties(actions, [
       "CLEAR_SELECTED_AGENCY",
       "FETCH_AGENCY",
       "FETCH_AGENCY_STARTED",
@@ -17,11 +16,6 @@ describe("<AgenciesForm /> - Actions", () => {
       "SAVE_AGENCY_FINISHED",
       "SAVE_AGENCY_SUCCESS",
       "SAVE_AGENCY_FAILURE"
-    ].forEach(property => {
-      expect(clonedActions).to.have.property(property);
-      delete clonedActions[property];
-    });
-
-    expect(clonedActions).to.be.empty;
+    ]);
   });
 });

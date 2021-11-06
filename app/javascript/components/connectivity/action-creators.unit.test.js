@@ -6,18 +6,17 @@ import { CLOSE_SNACKBAR } from "../notifier/actions";
 import * as actionCreators from "./action-creators";
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("components/connectivity/action-creator.js", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionCreators };
-
-    ["setNetworkStatus", "getServerStatus", "checkServerStatus", "setQueueStatus", "setPendingUserLogin"].forEach(
-      property => {
-        expect(creators).to.have.property(property);
-        delete creators[property];
-      }
-    );
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionCreators, [
+      "setNetworkStatus",
+      "getServerStatus",
+      "checkServerStatus",
+      "setQueueStatus",
+      "setPendingUserLogin"
+    ]);
   });
 
   it("should create an action to set the network status", () => {

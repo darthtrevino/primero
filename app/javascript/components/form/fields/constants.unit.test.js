@@ -1,14 +1,9 @@
 import * as constants from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<Form />/fields - Constants", () => {
   it("should have known properties", () => {
-    const clonedConstants = { ...constants };
-
-    ["ERROR_FIELD_NAME", "ORDERABLE_OPTIONS_FIELD_NAME"].forEach(property => {
-      expect(clonedConstants).to.have.property(property);
-      delete clonedConstants[property];
-    });
-
-    expect(clonedConstants).to.be.empty;
+    expectObjectHasProperties(constants, ["ERROR_FIELD_NAME", "ORDERABLE_OPTIONS_FIELD_NAME"]);
   });
 });

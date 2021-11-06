@@ -1,4 +1,5 @@
-import { setupMountedComponent } from "../../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
+
 import ActionDialog from "../../../action-dialog";
 import DialogTabs from "../dialog-tabs";
 
@@ -32,12 +33,12 @@ describe("<FlagDialog />", () => {
   });
 
   it("renders component with valid props", () => {
-    const flagDialogProps = { ...component.find(FlagDialog).props() };
-
-    ["children", "isBulkFlags", "tab", "setTab", "dialogOpen"].forEach(property => {
-      expect(flagDialogProps).to.have.property(property);
-      delete flagDialogProps[property];
-    });
-    expect(flagDialogProps).to.be.empty;
+    expectObjectHasProperties(component.find(FlagDialog).props(), [
+      "children",
+      "isBulkFlags",
+      "tab",
+      "setTab",
+      "dialogOpen"
+    ]);
   });
 });

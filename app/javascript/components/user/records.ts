@@ -1,6 +1,11 @@
+/* eslint-disable camelcase */
 import { Record } from "immutable";
 
-export const ListHeaderRecord = Record({
+export const ListHeaderRecord = Record<{
+  name: string | null;
+  field_name: string | null;
+  id_search: boolean;
+}>({
   name: null,
   field_name: null,
   id_search: false

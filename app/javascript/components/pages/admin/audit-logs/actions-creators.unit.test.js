@@ -3,16 +3,11 @@ import { RECORD_PATH } from "../../../../config";
 import actions from "./actions";
 import * as actionsCreators from "./action-creators";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<AuditLogs /> - pages/admin/audit-logs/action-creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionsCreators };
-
-    ["fetchAuditLogs", "fetchPerformedBy", "setAuditLogsFilters"].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionsCreators, ["fetchAuditLogs", "fetchPerformedBy", "setAuditLogsFilters"]);
   });
 
   it("should check that 'fetchAuditLogs' action creator returns the correct object", () => {

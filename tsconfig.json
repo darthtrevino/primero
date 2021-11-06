@@ -11,7 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./app/javascript",
     "typeRoots": ["node_modules/@types", "./typings"],
-    "types": ["mocha", "chai", "node", "global"],
+    "types": ["mocha", "chai", "node", "global", "i18n-js"],
     "paths": {
       "~test": ["test/index.ts"],
       "~test/*": ["test/*"],
@@ -27,5 +27,5 @@
       "~middleware/*": ["middleware/*"]
     }
   },
-  "include": ["./app/javascript/**/*.ts*", "app/javascript/test/utils/index.js"]
+  "include": ["./app/javascript/**/*.ts*", "app/javascript/test/utils/index.ts"]
 }

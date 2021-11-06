@@ -1,25 +1,13 @@
 import * as constants from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("Verifying config constant", () => {
   it("should have known constant", () => {
-    const clonedConstants = { ...constants };
-
-    ["NAME", "SEVERITY"].forEach(property => {
-      expect(clonedConstants).to.have.property(property);
-      delete clonedConstants[property];
-    });
-
-    expect(clonedConstants).to.be.empty;
+    expectObjectHasProperties(constants, ["NAME", "SEVERITY"]);
   });
 
   it("should have known the SEVERITY properties ", () => {
-    const clonedProps = { ...constants.SEVERITY };
-
-    ["error", "info", "success", "warning"].forEach(property => {
-      expect(clonedProps).to.have.property(property);
-      delete clonedProps[property];
-    });
-
-    expect(clonedProps).to.be.empty;
+    expectObjectHasProperties(constants.SEVERITY, ["error", "info", "success", "warning"]);
   });
 });

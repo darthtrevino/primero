@@ -2,19 +2,13 @@ import sinon from "sinon";
 import configureStore from "redux-mock-store";
 
 import { RECORD_PATH } from "../../config";
+import { expectObjectHasProperties } from "~test";
 
 import * as actions from "./action-creators";
 
 describe("<IndexFilters /> - Action Creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actions };
-
-    ["applyFilters", "setFilters"].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actions, ["applyFilters", "setFilters"]);
   });
 
   it("should check the 'setFilters' action creator to return the correct object, when applying filters", () => {

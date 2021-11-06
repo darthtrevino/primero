@@ -7,6 +7,8 @@ import ActionButton from "../action-button";
 
 import ActionDialog from "./component";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<ActionDialog />", () => {
   let component;
   const props = {
@@ -58,10 +60,8 @@ describe("<ActionDialog />", () => {
   });
 
   it("should accept valid props", () => {
-    const actionDialogProps = { ...component.find(ActionDialog).props() };
-
     expect(component.find(ActionDialog)).to.have.lengthOf(1);
-    [
+    expectObjectHasProperties(component.find(ActionDialog).props(), [
       "cancelButtonProps",
       "cancelHandler",
       "children",
@@ -85,11 +85,7 @@ describe("<ActionDialog />", () => {
       "fetchArgs",
       "disableClose",
       "hideIcon"
-    ].forEach(property => {
-      expect(actionDialogProps).to.have.property(property);
-      delete actionDialogProps[property];
-    });
-    expect(actionDialogProps).to.be.empty;
+    ]);
   });
 
   it("should render DialogSubtitle with it's correct value ", () => {

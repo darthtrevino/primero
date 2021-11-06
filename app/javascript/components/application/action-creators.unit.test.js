@@ -6,11 +6,11 @@ import { ROUTES } from "../../config";
 import * as actionCreators from "./action-creators";
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("Application - Action Creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionCreators };
-
-    [
+    expectObjectHasProperties(actionCreators, [
       "disableNavigation",
       "fetchRoles",
       "fetchSystemPermissions",
@@ -21,12 +21,7 @@ describe("Application - Action Creators", () => {
       "setUserIdle",
       "fetchManagedRoles",
       "fetchSandboxUI"
-    ].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    ]);
   });
 
   it("should check the 'fetchSystemSettings' action creator to return the correct object", () => {

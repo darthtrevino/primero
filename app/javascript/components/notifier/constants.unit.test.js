@@ -1,25 +1,13 @@
 import * as constants from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<Notifier/> - constants", () => {
   it("should have known properties", () => {
-    const clonedConstants = { ...constants };
-
-    ["SNACKBAR_VARIANTS"].forEach(property => {
-      expect(clonedConstants).to.have.property(property);
-      delete clonedConstants[property];
-    });
-
-    expect(clonedConstants).to.be.empty;
+    expectObjectHasProperties(constants, ["SNACKBAR_VARIANTS"]);
   });
 
   it("should have known SNACKBAR_VARIANTS properties", () => {
-    const clonedConstants = { ...constants.SNACKBAR_VARIANTS };
-
-    ["error", "info", "success", "warning"].forEach(property => {
-      expect(clonedConstants).to.have.property(property);
-      delete clonedConstants[property];
-    });
-
-    expect(clonedConstants).to.be.empty;
+    expectObjectHasProperties(constants.SNACKBAR_VARIANTS, ["error", "info", "success", "warning"]);
   });
 });

@@ -1,14 +1,9 @@
 import * as index from "./index";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("Approvals - index", () => {
-  const indexValues = { ...index };
-
-  it("should have known exported properties", () => {
-    ["default"].forEach(property => {
-      expect(indexValues).to.have.property(property);
-      delete indexValues[property];
-    });
-
-    expect(indexValues).to.be.empty;
+  it("has expected properties", () => {
+    expectObjectHasProperties(index, ["default"]);
   });
 });

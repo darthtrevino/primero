@@ -1,14 +1,9 @@
 import * as constants from "./index";
 
-describe("<CustomToolbarSelect /> - index", () => {
-  const clone = { ...constants };
+import { expectObjectHasProperties } from "~test";
 
+describe("<CustomToolbarSelect /> - index", () => {
   it("should have known properties", () => {
-    expect(clone).to.be.an("object");
-    ["default"].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-    expect(clone).to.be.empty;
+    expectObjectHasProperties(constants, ["default"]);
   });
 });

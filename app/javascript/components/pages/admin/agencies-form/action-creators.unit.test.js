@@ -3,18 +3,14 @@ import { RECORD_PATH } from "../../../../config";
 import { ENQUEUE_SNACKBAR, generate } from "../../../notifier";
 
 import * as actionsCreators from "./action-creators";
+
 import actions from "./actions";
+
+import { expectObjectHasProperties } from "~test";
 
 describe("<AgenciesForm /> - Action Creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionsCreators };
-
-    ["fetchAgency", "saveAgency", "clearSelectedAgency"].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionsCreators, ["fetchAgency", "saveAgency", "clearSelectedAgency"]);
   });
 
   it("should check that 'fetchAgency' action creator returns the correct object", () => {

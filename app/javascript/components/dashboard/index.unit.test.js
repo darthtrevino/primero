@@ -1,13 +1,10 @@
-import clone from "lodash/clone";
-
 import * as index from "./index";
 
-describe("<Dashboard /> - index", () => {
-  const indexValues = clone(index);
+import { expectObjectHasProperties } from "~test";
 
+describe("<Dashboard /> - index", () => {
   it("should have known properties", () => {
-    expect(indexValues).to.be.an("object");
-    [
+    expectObjectHasProperties(index, [
       "BadgedIndicator",
       "DashboardTable",
       "DoughnutChart",
@@ -18,11 +15,6 @@ describe("<Dashboard /> - index", () => {
       "ActionMenu",
       "DashboardChip",
       "PieChart"
-    ].forEach(property => {
-      expect(indexValues).to.have.property(property);
-      delete indexValues[property];
-    });
-
-    expect(indexValues).to.be.empty;
+    ]);
   });
 });

@@ -1,18 +1,9 @@
 import actions from "./actions";
+import { expectObjectHasProperties } from "~test";
 
 describe("Application - Actions", () => {
-  describe("actions", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...actions };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    [
+  it("has expected exports", () => {
+    expectObjectHasProperties(actions, [
       "DISABLE_NAVIGATION",
       "FETCH_ROLES",
       "FETCH_ROLES_FAILURE",
@@ -44,11 +35,6 @@ describe("Application - Actions", () => {
       "FETCH_MANAGED_ROLES_SUCCESS",
       "FETCH_MANAGED_ROLES_STARTED",
       "FETCH_MANAGED_ROLES_FINISHED"
-    ].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(actions).to.have.property(property);
-        delete clone[property];
-      });
-    });
+    ]);
   });
 });

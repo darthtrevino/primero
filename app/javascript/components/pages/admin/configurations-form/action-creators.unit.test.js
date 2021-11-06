@@ -5,19 +5,11 @@ import { ENQUEUE_SNACKBAR, generate, SNACKBAR_VARIANTS } from "../../../notifier
 import * as actionsCreators from "./action-creators";
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("configurations-form/action-creators.js", () => {
-  describe("exported action-creators", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...actionsCreators };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    [
+  it("exports known action-creators", () => {
+    expectObjectHasProperties(actionsCreators, [
       "appliedConfigMessage",
       "applyConfiguration",
       "applyingConfigMessage",
@@ -27,12 +19,7 @@ describe("configurations-form/action-creators.js", () => {
       "fetchConfiguration",
       "saveConfiguration",
       "sentToProduction"
-    ].forEach(actionCreator => {
-      it(`exports '${actionCreator}'`, () => {
-        expect(clone).to.have.property(actionCreator);
-        delete clone[actionCreator];
-      });
-    });
+    ]);
   });
 
   describe("exported objects by action-creators", () => {

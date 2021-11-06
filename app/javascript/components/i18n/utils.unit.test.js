@@ -1,17 +1,12 @@
 import * as utils from "./utils";
 import { ORIENTATION } from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("I8n - utils", () => {
   describe("with exposed properties", () => {
     it("should have known methods", () => {
-      const clone = { ...utils };
-
-      ["getLocaleDir"].forEach(property => {
-        expect(clone).to.have.property(property);
-        expect(clone[property]).to.be.a("function");
-        delete clone[property];
-      });
-      expect(clone).to.be.empty;
+      expectObjectHasProperties(utils, ["getLocaleDir"]);
     });
   });
 

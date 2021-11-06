@@ -1,23 +1,10 @@
 import * as utils from "./utils";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("index-filters/components/filter-types/select-filter/utils.js", () => {
-  describe("with exposed properties", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...utils };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    ["getOptionName"].forEach(property => {
-      it(`exports ${property}`, () => {
-        expect(clone).to.have.property(property);
-        delete clone[property];
-      });
-    });
+  it("exposes expected properties", () => {
+    expectObjectHasProperties(utils, ["getOptionName"]);
   });
 
   describe("getOptionName()", () => {

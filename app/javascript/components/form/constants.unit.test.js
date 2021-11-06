@@ -1,11 +1,10 @@
 import * as constants from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<Form /> - Constants", () => {
   it("should have known properties", () => {
-    const clonedConstants = { ...constants };
-
-    expect(clonedConstants).to.be.an("object");
-    [
+    expectObjectHasProperties(constants, [
       "DIALOG_TRIGGER",
       "CHECK_BOX_FIELD",
       "CUSTOM_LOOKUPS",
@@ -35,20 +34,11 @@ describe("<Form /> - Constants", () => {
       "HIDDEN_FIELD",
       "SELECT_CHANGE_REASON",
       "EMPTY_VALUE"
-    ].forEach(property => {
-      expect(clonedConstants).to.have.property(property);
-      delete clonedConstants[property];
-    });
-
-    expect(clonedConstants).to.be.empty;
+    ]);
   });
 
   it("should have known properties for OPTION_TYPES", () => {
-    const clonedOptionTypes = { ...constants.OPTION_TYPES };
-
-    expect(clonedOptionTypes).to.be.an("object");
-
-    [
+    expectObjectHasProperties(constants.OPTION_TYPES, [
       "AGENCY",
       "AGENCY_CURRENT_USER",
       "FORM_GROUP",
@@ -68,11 +58,6 @@ describe("<Form /> - Constants", () => {
       "USER",
       "USER_GROUP",
       "USER_GROUP_PERMITTED"
-    ].forEach(property => {
-      expect(clonedOptionTypes).to.have.property(property);
-      delete clonedOptionTypes[property];
-    });
-
-    expect(clonedOptionTypes).to.be.empty;
+    ]);
   });
 });

@@ -1,11 +1,10 @@
 import * as index from "./index";
 
-describe("pages - index", () => {
-  const indexValues = { ...index };
+import { expectObjectHasProperties } from "~test";
 
+describe("pages - index", () => {
   it("should have known properties", () => {
-    expect(indexValues).to.be.an("object");
-    [
+    expectObjectHasProperties(index, [
       "Admin",
       "AgenciesForm",
       "AgenciesList",
@@ -32,10 +31,6 @@ describe("pages - index", () => {
       "UserGroupsList",
       "UsersForm",
       "UsersList"
-    ].forEach(property => {
-      expect(indexValues).to.have.property(property);
-      delete indexValues[property];
-    });
-    expect(indexValues).to.be.empty;
+    ]);
   });
 });

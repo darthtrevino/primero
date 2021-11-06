@@ -1,14 +1,9 @@
 import * as displayDataConstants from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<DisplayData /> - Constants", () => {
   it("should have known constant", () => {
-    const constants = { ...displayDataConstants };
-
-    ["NAME"].forEach(property => {
-      expect(constants).to.have.property(property);
-      delete constants[property];
-    });
-
-    expect(constants).to.be.empty;
+    expectObjectHasProperties(displayDataConstants, ["NAME"]);
   });
 });

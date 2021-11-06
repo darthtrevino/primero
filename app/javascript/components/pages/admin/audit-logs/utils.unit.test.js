@@ -3,17 +3,12 @@ import { fromJS } from "immutable";
 import { TIMESTAMP, USER_NAME } from "./constants";
 import * as helper from "./utils";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<AuditLogs /> - Helpers", () => {
   describe("with exposed properties", () => {
     it("should have known methods", () => {
-      const clone = { ...helper };
-
-      ["buildAuditLogsQuery", "getFilters", "searchableUsers"].forEach(property => {
-        expect(clone).to.have.property(property);
-        expect(clone[property]).to.be.a("function");
-        delete clone[property];
-      });
-      expect(clone).to.be.empty;
+      expectObjectHasProperties(helper, ["buildAuditLogsQuery", "getFilters", "searchableUsers"]);
     });
   });
 

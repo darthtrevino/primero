@@ -1,7 +1,7 @@
 import MUIDataTable from "mui-datatables";
 import { fromJS } from "immutable";
 
-import { setupMountedComponent } from "../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
 
 import DashboardTable from "./component";
 
@@ -32,14 +32,7 @@ describe("<DashboardTable />", () => {
   });
 
   it("renders a MUIDataTable with valid Props", () => {
-    const muiDataTableProps = { ...component.find(MUIDataTable).props() };
-
-    ["columns", "options", "data", "title"].forEach(property => {
-      expect(muiDataTableProps).to.have.property(property);
-      delete muiDataTableProps[property];
-    });
-
-    expect(muiDataTableProps).to.be.empty;
+    expectObjectHasProperties(component.find(MUIDataTable).props(), ["columns", "options", "data", "title"]);
   });
 
   it("should render Caption", () => {

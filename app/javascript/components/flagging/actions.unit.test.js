@@ -1,10 +1,10 @@
 import constants from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("Flagging - Constants", () => {
   it("should have known properties", () => {
-    const clonedConstants = { ...constants };
-
-    [
+    expectObjectHasProperties(constants, [
       "FETCH_FLAGS",
       "FETCH_FLAGS_SUCCESS",
       "UNFLAG",
@@ -15,11 +15,6 @@ describe("Flagging - Constants", () => {
       "SET_SELECTED_FLAG_SUCCESS",
       "FETCH_FLAGS_STARTED",
       "FETCH_FLAGS_FINISHED"
-    ].forEach(property => {
-      expect(clonedConstants).to.have.property(property);
-      delete clonedConstants[property];
-    });
-
-    expect(clonedConstants).to.be.empty;
+    ]);
   });
 });

@@ -1,7 +1,8 @@
 import { Map, fromJS } from "immutable";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
 
-import { setupMountedComponent } from "../../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
+
 import ApprovalSummary from "../summary";
 import ApprovalDetail from "../detail";
 
@@ -39,12 +40,6 @@ describe("<ApprovalPanel /> - Component", () => {
   });
 
   it("renders component with valid props", () => {
-    const approvalsProps = { ...component.find(ApprovalPanel).props() };
-
-    ["approvalSubform", "css"].forEach(property => {
-      expect(approvalsProps).to.have.property(property);
-      delete approvalsProps[property];
-    });
-    expect(approvalsProps).to.be.empty;
+    expectObjectHasProperties(component.find(ApprovalPanel).props(), ["approvalSubform", "css"]);
   });
 });

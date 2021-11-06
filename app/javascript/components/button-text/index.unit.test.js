@@ -1,14 +1,9 @@
 import * as index from "./index";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<ButtonText/> - index", () => {
-  const clone = { ...index };
-
   it("should have known exported properties", () => {
-    ["default"].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    expectObjectHasProperties(index, ["default"]);
   });
 });

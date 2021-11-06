@@ -1,22 +1,14 @@
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("configurations-form/actions.js", () => {
   it("exports an object", () => {
     expect(actions).to.be.an("object");
   });
 
-  describe("properties", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...actions };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    [
+  it("exports known properties", () => {
+    expectObjectHasProperties(actions, [
       "APPLY_CONFIGURATION",
       "APPLY_CONFIGURATION_STARTED",
       "APPLY_CONFIGURATION_SUCCESS",
@@ -44,11 +36,6 @@ describe("configurations-form/actions.js", () => {
       "SEND_TO_PRODUCTION_FINISHED",
       "SEND_TO_PRODUCTION_SUCCESS",
       "SEND_TO_PRODUCTION_FAILURE"
-    ].forEach(property => {
-      it(`exports '${property}' action`, () => {
-        expect(actions).to.have.property(property);
-        delete clone[property];
-      });
-    });
+    ]);
   });
 });

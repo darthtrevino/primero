@@ -2,7 +2,7 @@ import { IconButton } from "@material-ui/core";
 import { expect } from "chai";
 
 import { FieldRecord } from "../records";
-import { setupMockFieldComponent, setupMockFormComponent } from "../../../test";
+import { setupMockFieldComponent, setupMockFormComponent } from "~test";
 import WatchedFormSectionField from "../components/watched-form-section-field";
 import { SELECT_FIELD } from "../constants";
 

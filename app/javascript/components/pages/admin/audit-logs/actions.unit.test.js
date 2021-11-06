@@ -1,10 +1,10 @@
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<AuditLogs /> - pages/admin/audit-logs/actions", () => {
   it("should have known actions", () => {
-    const clone = { ...actions };
-
-    [
+    expectObjectHasProperties(actions, [
       "FETCH_AUDIT_LOGS",
       "FETCH_AUDIT_LOGS_FAILURE",
       "FETCH_AUDIT_LOGS_FINISHED",
@@ -16,11 +16,6 @@ describe("<AuditLogs /> - pages/admin/audit-logs/actions", () => {
       "FETCH_PERFORMED_BY_STARTED",
       "FETCH_PERFORMED_BY_SUCCESS",
       "SET_AUDIT_LOGS_FILTER"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    ]);
   });
 });

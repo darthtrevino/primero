@@ -1,10 +1,10 @@
 import * as index from "./index";
 
-describe("<Form /> - index", () => {
-  const indexValues = { ...index };
+import { expectObjectHasProperties } from "~test";
 
+describe("<Form /> - index", () => {
   it("should have known properties", () => {
-    [
+    expectObjectHasProperties(index, [
       "AUDIO_FIELD",
       "ActionsMenu",
       "CHECK_BOX_FIELD",
@@ -43,10 +43,6 @@ describe("<Form /> - index", () => {
       "whichFormMode",
       "SELECT_CHANGE_REASON",
       "EMPTY_VALUE"
-    ].forEach(property => {
-      expect(indexValues).to.have.property(property);
-      delete indexValues[property];
-    });
-    expect(indexValues).to.be.empty;
+    ]);
   });
 });

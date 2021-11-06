@@ -1,18 +1,10 @@
 import actions from "./actions";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("pages/account/actions.js", () => {
-  describe("properties", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...actions };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    [
+  it("exports expected properties", () => {
+    expectObjectHasProperties(actions, [
       "CLEAR_CURRENT_USER",
       "FETCH_CURRENT_USER",
       "FETCH_CURRENT_USER_STARTED",
@@ -23,11 +15,6 @@ describe("pages/account/actions.js", () => {
       "UPDATE_CURRENT_USER_FAILURE",
       "UPDATE_CURRENT_USER_STARTED",
       "UPDATE_CURRENT_USER_SUCCESS"
-    ].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(actions).to.have.property(property);
-        delete clone[property];
-      });
-    });
+    ]);
   });
 });

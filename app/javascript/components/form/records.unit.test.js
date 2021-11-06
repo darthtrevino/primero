@@ -1,22 +1,9 @@
 import * as records from "./records";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("Verifying records", () => {
-  describe("properties", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...records };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    ["FieldRecord", "FormSectionRecord", "Option"].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(records).to.have.property(property);
-        delete clone[property];
-      });
-    });
+  it("has expected properties", () => {
+    expectObjectHasProperties(records, ["FieldRecord", "FormSectionRecord", "Option"]);
   });
 });

@@ -1,6 +1,6 @@
 import { Tab, Tabs, Box } from "@material-ui/core";
 
-import { setupMountedComponent } from "../../../../test";
+import { setupMountedComponent, expectObjectHasProperties } from "~test";
 
 import DialogTabs from "./component";
 
@@ -35,12 +35,6 @@ describe("<DialogTabs />", () => {
   });
 
   it("renders component with valid props", () => {
-    const dialogTabsProps = { ...component.find(DialogTabs).props() };
-
-    ["children", "isBulkFlags", "tab", "setTab"].forEach(property => {
-      expect(dialogTabsProps).to.have.property(property);
-      delete dialogTabsProps[property];
-    });
-    expect(dialogTabsProps).to.be.empty;
+    expectObjectHasProperties(component.find(DialogTabs).props(), ["children", "isBulkFlags", "tab", "setTab"]);
   });
 });

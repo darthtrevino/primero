@@ -1,10 +1,10 @@
 import * as index from "./index";
 
-describe("<Notifier />- index", () => {
-  const indexValues = { ...index };
+import { expectObjectHasProperties } from "~test";
 
+describe("<Notifier />- index", () => {
   it("should have known properties", () => {
-    [
+    expectObjectHasProperties(index, [
       "CLOSE_SNACKBAR",
       "closeSnackbar",
       "ENQUEUE_SNACKBAR",
@@ -15,10 +15,6 @@ describe("<Notifier />- index", () => {
       "REMOVE_SNACKBAR",
       "removeSnackbar",
       "SNACKBAR_VARIANTS"
-    ].forEach(property => {
-      expect(indexValues).to.have.property(property);
-      delete indexValues[property];
-    });
-    expect(indexValues).to.be.empty;
+    ]);
   });
 });

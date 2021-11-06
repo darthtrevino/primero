@@ -1,26 +1,13 @@
 import * as constants from "./constants";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<ActionButton />  - components/icon-button/constants", () => {
   it("exports an object", () => {
     expect(constants).to.be.an("object");
   });
 
-  describe("constants", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...constants };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    ["NAME"].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(constants).to.have.property(property);
-        delete clone[property];
-      });
-    });
+  it("exports expected properties", () => {
+    expectObjectHasProperties(constants, ["NAME"]);
   });
 });
