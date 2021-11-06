@@ -1,20 +1,14 @@
-import { stub } from "../../../../test";
+import { expectObjectHasProperties, stub } from "../../../../test";
 import { RECORD_PATH } from "../../../../config";
 import { ENQUEUE_SNACKBAR, generate } from "../../../notifier";
 
 import * as actionsCreators from "./action-creators";
 import actions from "./actions";
+import actionCreators from "../../../key-performance-indicators/action-creators";
 
 describe("<ContactInformation /> - Action Creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionsCreators };
-
-    ["saveContactInformation"].forEach(property => {
-      expect(creators).to.have.property(property);
-      delete creators[property];
-    });
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionCreators, ["saveContactInformation"]);
   });
 
   it("should check that 'saveContactInformation' action creator returns the correct object", () => {

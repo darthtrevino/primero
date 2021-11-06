@@ -1,7 +1,7 @@
 import { fromJS } from "immutable";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
 
-import { setupMountedComponent } from "../../test";
+import { expectObjectHasProperties, setupMountedComponent } from "../../test";
 import RecordFormTitle from "../record-form/form/record-form-title";
 import ActionButton from "../action-button";
 import { RECORD_TYPES } from "../../config";
@@ -123,9 +123,9 @@ describe("<IncidentFromCase /> - Component", () => {
   });
 
   it("renders component with valid props", () => {
-    const incidentsProps = { ...component.find(IncidentFromCase).props() };
+    const found = component.find(IncidentFromCase).props();
 
-    [
+    expectObjectHasProperties(found, [
       "dirty",
       "record",
       "incidents",
@@ -135,10 +135,6 @@ describe("<IncidentFromCase /> - Component", () => {
       "setFieldValue",
       "handleSubmit",
       "recordType"
-    ].forEach(property => {
-      expect(incidentsProps).to.have.property(property);
-      delete incidentsProps[property];
-    });
-    expect(incidentsProps).to.be.empty;
+    ]);
   });
 });

@@ -1,3 +1,4 @@
+import { expectObjectHasProperties } from "../../../../test";
 import * as constants from "./constants";
 
 describe("configurations-list/constants.js", () => {
@@ -5,22 +6,7 @@ describe("configurations-list/constants.js", () => {
     expect(constants).to.be.an("object");
   });
 
-  describe("constants", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...constants };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    ["NAME"].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(constants).to.have.property(property);
-        delete clone[property];
-      });
-    });
+  it("has expected properties", () => {
+    expectObjectHasProperties(constants, ["NAME"]);
   });
 });

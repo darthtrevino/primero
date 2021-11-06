@@ -1,6 +1,6 @@
 import { fromJS } from "immutable";
 
-import { setupMountedComponent } from "../../test";
+import { expectObjectHasProperties, setupMountedComponent } from "../../test";
 
 import IndexFilters from "./component";
 import MoreSection from "./components/more-section";
@@ -35,14 +35,9 @@ describe("<IndexFitlers>", () => {
 
   it("renders search bar with valid props", () => {
     const { component } = setupMountedComponent(IndexFilters, props, state);
-    const clone = { ...component.find(Search).props() };
+    const found = component.find(Search).props();
 
-    ["handleReset"].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    expectObjectHasProperties(found, ["handleReset"]);
   });
 
   it("renders MoreSection filters", () => {

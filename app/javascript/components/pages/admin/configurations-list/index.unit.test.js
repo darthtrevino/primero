@@ -1,3 +1,4 @@
+import { expectObjectHasProperties } from "../../../../test";
 import * as index from "./index";
 
 describe("configurations-list/index.js", () => {
@@ -5,22 +6,7 @@ describe("configurations-list/index.js", () => {
     expect(index).to.be.an("object");
   });
 
-  describe("properties", () => {
-    let clone;
-
-    before(() => {
-      clone = { ...index };
-    });
-
-    after(() => {
-      expect(clone).to.be.empty;
-    });
-
-    ["default", "reducer"].forEach(property => {
-      it(`exports '${property}'`, () => {
-        expect(index).to.have.property(property);
-        delete clone[property];
-      });
-    });
+  it("has expected properties", () => {
+    expectObjectHasProperties(index, ["default", "reducer"]);
   });
 });

@@ -1,7 +1,7 @@
 import { fromJS } from "immutable";
 import { AccordionSummary } from "@material-ui/core";
 
-import { setupMockFormComponent, spy, fake } from "../../../test";
+import { setupMockFormComponent, spy, fake, expectObjectHasProperties } from "../../../test";
 
 import Panel from "./panel";
 
@@ -52,14 +52,16 @@ describe("<IndexFilters />/<Panel />", () => {
   it("renders valid props for Panel component", () => {
     const { component } = setupMockFormComponent(Panel, { props, includeFormProvider: true });
 
-    const clone = { ...component.find(Panel).props() };
+    const found = component.find(Panel).props();
 
-    ["filter", "getValues", "handleReset", "children", "commonInputProps", "moreSectionFilters"].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    expectObjectHasProperties(found, [
+      "filter",
+      "getValues",
+      "handleReset",
+      "children",
+      "commonInputProps",
+      "moreSectionFilters"
+    ]);
   });
 
   it("render the correct label if the filter is for approval", () => {

@@ -2,7 +2,7 @@ import { fromJS } from "immutable";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
 
 import LookupValue from "../../../record-form/form/subforms/subform-header-lookup";
-import { setupMountedComponent } from "../../../../test";
+import { expectObjectHasProperties, setupMountedComponent } from "../../../../test";
 import IncidentSummary from "../summary";
 import IncidentDetail from "../detail";
 import { RECORD_TYPES } from "../../../../config";
@@ -138,12 +138,16 @@ describe("<IncidentPanel /> - Component", () => {
   });
 
   it("renders component with valid props", () => {
-    const incidentsProps = { ...component.find(IncidentPanel).props() };
+    const found = component.find(IncidentPanel).props();
 
-    ["incident", "incidentCaseId", "css", "mode", "setFieldValue", "handleSubmit", "recordType"].forEach(property => {
-      expect(incidentsProps).to.have.property(property);
-      delete incidentsProps[property];
-    });
-    expect(incidentsProps).to.be.empty;
+    expectObjectHasProperties(found, [
+      "incident",
+      "incidentCaseId",
+      "css",
+      "mode",
+      "setFieldValue",
+      "handleSubmit",
+      "recordType"
+    ]);
   });
 });

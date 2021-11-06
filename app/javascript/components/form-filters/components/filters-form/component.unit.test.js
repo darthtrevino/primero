@@ -1,7 +1,7 @@
 import { fromJS } from "immutable";
 import { FormProvider } from "react-hook-form";
 
-import { setupMountedComponent } from "../../../../test";
+import { expectObjectHasProperties, setupMountedComponent } from "../../../../test";
 import { ACTIONS } from "../../../../libs/permissions";
 import Actions from "../../../index-filters/components/actions";
 import { FILTER_TYPES } from "../../../index-filters";
@@ -52,9 +52,9 @@ describe("<AdminFilters /> - pages/admin/components/filters/component", () => {
 
   it("should have valid props", () => {
     const adminFiltersProps = { ...component.find(AdminFilters).props() };
+    const found = component.find(adminFiltersProps);
 
-    expect(component.find(adminFiltersProps)).to.have.lengthOf(1);
-    [
+    expectObjectHasProperties(found, [
       "clearFields",
       "closeDrawerOnSubmit",
       "defaultFilters",
@@ -63,11 +63,7 @@ describe("<AdminFilters /> - pages/admin/components/filters/component", () => {
       "mobileDisplay",
       "onSubmit",
       "showDrawer"
-    ].forEach(property => {
-      expect(adminFiltersProps).to.have.property(property);
-      delete adminFiltersProps[property];
-    });
-    expect(adminFiltersProps).to.be.empty;
+    ]);
   });
 
   context("when the filters include a non-permitted one to the user", () => {

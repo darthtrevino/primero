@@ -1,7 +1,7 @@
 import { Select } from "@material-ui/core";
 import { DatePicker, DateTimePicker } from "@material-ui/pickers";
 
-import { setupMockFormComponent, spy } from "../../../../../test";
+import { expectObjectHasProperties, setupMockFormComponent, spy } from "../../../../../test";
 
 import DateFilter from "./component";
 
@@ -62,11 +62,11 @@ describe("<DateFilter>", () => {
       setReset: () => {}
     };
     const { component } = setupMockFormComponent(DateFilter, { props: newProps, includeFormProvider: true });
-    const clone = { ...component.find(DateFilter).props() };
+    const found = component.find(DateFilter).props();
 
     expect(component.exists("Panel")).to.be.true;
 
-    [
+    expectObjectHasProperties(found, [
       "addFilterToList",
       "commonInputProps",
       "filter",
@@ -76,12 +76,7 @@ describe("<DateFilter>", () => {
       "reset",
       "setMoreSectionFilters",
       "setReset"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    ]);
   });
 
   it("should have not call setMoreSectionFilters if mode.secondary is false when changing value", () => {

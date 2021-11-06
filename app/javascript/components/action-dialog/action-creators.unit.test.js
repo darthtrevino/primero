@@ -1,18 +1,11 @@
 import { SET_DIALOG, SET_DIALOG_PENDING } from "./actions";
 import * as actionCreators from "./action-creators";
 
+import { expectObjectHasProperties } from "~test";
+
 describe("<RecordActions /> - Action Creators", () => {
   it("should have known action creators", () => {
-    const creators = { ...actionCreators };
-
-    expect(creators).to.have.property("setDialog");
-    expect(creators).to.have.property("setPending");
-    expect(creators).to.have.property("clearDialog");
-    delete creators.setDialog;
-    delete creators.setPending;
-    delete creators.clearDialog;
-
-    expect(creators).to.be.empty;
+    expectObjectHasProperties(actionCreators, ["setDialog", "setPending", "clearDialog"]);
   });
 
   it("should check that 'setDialog' action creator returns the correct object", () => {

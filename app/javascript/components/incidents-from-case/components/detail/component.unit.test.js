@@ -1,7 +1,7 @@
 import { fromJS } from "immutable";
 import { Grid } from "@material-ui/core";
 
-import { setupMountedComponent } from "../../../../test";
+import { expectObjectHasProperties, setupMountedComponent } from "../../../../test";
 import DisplayData from "../../../display-data";
 import ActionButton from "../../../action-button";
 import { RECORD_TYPES } from "../../../../config";
@@ -56,9 +56,9 @@ describe("<IncidentDetail /> - Component", () => {
   });
 
   it("renders component with valid props", () => {
-    const incidentDetailProps = { ...component.find(IncidentDetail).props() };
+    const found = component.find(IncidentDetail).props();
 
-    [
+    expectObjectHasProperties(found, [
       "css",
       "handleSubmit",
       "incidentCaseId",
@@ -71,10 +71,6 @@ describe("<IncidentDetail /> - Component", () => {
       "setFieldValue",
       "recordType",
       "handleCreateIncident"
-    ].forEach(property => {
-      expect(incidentDetailProps).to.have.property(property);
-      delete incidentDetailProps[property];
-    });
-    expect(incidentDetailProps).to.be.empty;
+    ]);
   });
 });

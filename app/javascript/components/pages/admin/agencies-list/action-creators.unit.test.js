@@ -18,7 +18,7 @@ describe("<AgenciesList /> - Action Creators", () => {
           managed: true
         },
         path: RECORD_PATH.agencies
-      }
+      };
     };
 
     expect(actionsCreators.fetchAgencies()).to.deep.equal(expectedAction);

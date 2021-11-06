@@ -1,4 +1,4 @@
-import { setupMockFormComponent, spy } from "../../../../../test";
+import { expectObjectHasProperties, setupMockFormComponent, spy } from "../../../../../test";
 
 import SwitchFilter from "./component";
 
@@ -46,11 +46,11 @@ describe("<SwitchFilter>", () => {
       setReset: () => {}
     };
     const { component } = setupMockFormComponent(SwitchFilter, { props: newProps, includeFormProvider: true });
-    const clone = { ...component.find(SwitchFilter).props() };
+    const found = component.find(SwitchFilter).props();
 
     expect(component.exists("input[type='checkbox']")).to.be.true;
 
-    [
+    expectObjectHasProperties(found, [
       "addFilterToList",
       "commonInputProps",
       "filter",
@@ -59,12 +59,7 @@ describe("<SwitchFilter>", () => {
       "reset",
       "setMoreSectionFilters",
       "setReset"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    ]);
   });
 
   it("should have not call setMoreSectionFilters if mode.secondary is false when changing value", () => {

@@ -1,4 +1,4 @@
-import { setupMockFormComponent, spy } from "../../../../../test";
+import { expectObjectHasProperties, setupMockFormComponent, spy } from "../../../../../test";
 
 import ChipsFilter from "./component";
 
@@ -45,9 +45,9 @@ describe("<ChipsFilter>", () => {
 
     ["option-1", "option-2"].forEach(option => expect(component.exists(`input[value='${option}']`)).to.be.true);
 
-    const clone = { ...component.find(ChipsFilter).props() };
+    const found = component.find(ChipsFilter).props();
 
-    [
+    expectObjectHasProperties(found, [
       "addFilterToList",
       "commonInputProps",
       "filter",
@@ -56,12 +56,7 @@ describe("<ChipsFilter>", () => {
       "reset",
       "setMoreSectionFilters",
       "setReset"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    ]);
   });
 
   it("should have not call setMoreSectionFilters if mode.secondary is false when changing value", () => {

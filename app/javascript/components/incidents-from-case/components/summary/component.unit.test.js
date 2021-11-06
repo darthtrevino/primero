@@ -1,7 +1,7 @@
 import { fromJS } from "immutable";
 import { Grid } from "@material-ui/core";
 
-import { setupMountedComponent } from "../../../../test";
+import { expectObjectHasProperties, setupMountedComponent } from "../../../../test";
 
 import IncidentSummary from "./component";
 
@@ -28,12 +28,8 @@ describe("<IncidentSummary /> - Component", () => {
   });
 
   it("renders component with valid props", () => {
-    const incidentSummaryProps = { ...component.find(IncidentSummary).props() };
+    const found = component.find(IncidentSummary).props();
 
-    ["css", "incidentDate", "incidentType"].forEach(property => {
-      expect(incidentSummaryProps).to.have.property(property);
-      delete incidentSummaryProps[property];
-    });
-    expect(incidentSummaryProps).to.be.empty;
+    expectObjectHasProperties(found, ["css", "incidentDate", "incidentType"]);
   });
 });

@@ -1,4 +1,4 @@
-import { setupMockFormComponent, spy } from "../../../../../test";
+import { expectObjectHasProperties, setupMockFormComponent, spy } from "../../../../../test";
 
 import ToggleFilter from "./component";
 
@@ -43,11 +43,11 @@ describe("<ToggleFilter>", () => {
       setReset: () => {}
     };
     const { component } = setupMockFormComponent(ToggleFilter, { props: newProps, includeFormProvider: true });
-    const clone = { ...component.find(ToggleFilter).props() };
+    const found = component.find(ToggleFilter).props();
 
     ["option-1", "option-2"].forEach(option => expect(component.exists(`button[value='${option}']`)).to.be.true);
 
-    [
+    expectObjectHasProperties(found, [
       "addFilterToList",
       "commonInputProps",
       "filter",
@@ -56,12 +56,7 @@ describe("<ToggleFilter>", () => {
       "reset",
       "setMoreSectionFilters",
       "setReset"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    ]);
   });
 
   it("should have not call setMoreSectionFilters if mode.secondary is false when changing value", () => {

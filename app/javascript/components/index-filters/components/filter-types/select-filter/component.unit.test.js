@@ -1,6 +1,6 @@
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import { setupMockFormComponent, spy } from "../../../../../test";
+import { expectObjectHasProperties, setupMockFormComponent, spy } from "../../../../../test";
 
 import SelectFilter from "./component";
 
@@ -38,11 +38,11 @@ describe("<SelectFilter>", () => {
       setReset: () => {}
     };
     const { component } = setupMockFormComponent(SelectFilter, { props: newProps, includeFormProvider: true });
-    const clone = { ...component.find(SelectFilter).props() };
+    const found = component.find(SelectFilter).props();
 
     expect(component.exists("Panel")).to.be.true;
 
-    [
+    expectObjectHasProperties(found, [
       "addFilterToList",
       "commonInputProps",
       "filter",
@@ -52,12 +52,7 @@ describe("<SelectFilter>", () => {
       "reset",
       "setMoreSectionFilters",
       "setReset"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    ]);
   });
 
   it("should have not call setMoreSectionFilters if mode.secondary is false when changing value", () => {

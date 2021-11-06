@@ -1,6 +1,6 @@
 import { fromJS, List } from "immutable";
 
-import { setupMockFormComponent } from "../../../test";
+import { expectObjectHasProperties, setupMockFormComponent } from "../../../test";
 
 import CheckboxFilter from "./filter-types/checkbox-filter/component";
 import MoreSection from "./more-section";
@@ -47,9 +47,9 @@ describe("<MoreSection>", () => {
   it("renders valid props for MoreSection component", () => {
     const { component } = setupMockFormComponent(MoreSection, { props, includeFormProvider: true });
 
-    const clone = { ...component.find(MoreSection).props() };
+    const found = component.find(MoreSection).props();
 
-    [
+    expectObjectHasProperties(found, [
       "addFilterToList",
       "allAvailable",
       "commonInputProps",
@@ -61,26 +61,21 @@ describe("<MoreSection>", () => {
       "recordType",
       "setMore",
       "setMoreSectionFilters"
-    ].forEach(property => {
-      expect(clone).to.have.property(property);
-      delete clone[property];
-    });
-
-    expect(clone).to.be.empty;
+    ]);
   });
 
   it("renders valid props for rendered filters", () => {
     const { component } = setupMockFormComponent(MoreSection, { props, includeFormProvider: true });
 
-    const clone = { ...component.find(CheckboxFilter).props() };
+    const found = component.find(CheckboxFilter).props();
 
-    ["addFilterToList", "filter", "filterToList", "mode", "moreSectionFilters", "setMoreSectionFilters"].forEach(
-      property => {
-        expect(clone).to.have.property(property);
-        delete clone[property];
-      }
-    );
-
-    expect(clone).to.be.empty;
+    expectObjectHasProperties(found, [
+      "addFilterToList",
+      "filter",
+      "filterToList",
+      "mode",
+      "moreSectionFilters",
+      "setMoreSectionFilters"
+    ]);
   });
 });
